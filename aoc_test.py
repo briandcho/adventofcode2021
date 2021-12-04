@@ -21,6 +21,25 @@ def test_count_increases_official():
     assert aoc.count_increases(LOAD) == 1233
 
 
+@pytest.mark.parametrize(
+    ("sweep_report", "n_increases"),
+    (
+        ((0,), 0),
+        ((0, 0), 0),
+        ((0, 1), 0),
+        ((0, 1, 2), 0),
+        ((0, 1, 2, 3), 1),
+        ((199, 200, 208, 210, 200, 207, 240, 269, 260, 263), 5),
+    ),
+)
+def test_count_window_increases(sweep_report, n_increases):
+    assert aoc.count_window_increases(sweep_report) == n_increases
+
+
+def test_count_window_increases_official():
+    assert aoc.count_window_increases(LOAD) == 1275
+
+
 LOAD = [
     156,
     153,
