@@ -14,3 +14,16 @@ def count_window_increases(sweep_data: list[int]) -> int:
         if sum(last_window) < sum(window):
             n_increases += 1
     return n_increases
+
+
+def navigate(planned_course: list[str]) -> int:
+    h_pos = depth = 0
+    for cmd in planned_course:
+        dir_, n = cmd.split()
+        if dir_ == "forward":
+            h_pos += int(n)
+        elif dir_ == "down":
+            depth += int(n)
+        else:
+            depth -= int(n)
+    return h_pos * depth

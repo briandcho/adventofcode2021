@@ -38,3 +38,30 @@ def test_count_window_increases(sweep_report, n_increases):
 
 def test_count_window_increases_official(day1_sweep_report):
     assert aoc.count_window_increases(day1_sweep_report) == 1275
+
+
+@pytest.mark.parametrize(
+    ("planned_course", "position"),
+    (
+        (("forward 1",), 0),
+        (("forward 1", "down 1"), 1),
+        (("forward 1", "down 2", "up 1"), 1),
+        (
+            (
+                "forward 5",
+                "down 5",
+                "forward 8",
+                "up 3",
+                "down 8",
+                "forward 2",
+            ),
+            150,
+        ),
+    ),
+)
+def test_navigate(planned_course, position):
+    assert aoc.navigate(planned_course) == position
+
+
+def test_navigate_official(day2_planned_course):
+    assert aoc.navigate(day2_planned_course) == 2019945
