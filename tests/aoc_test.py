@@ -56,5 +56,21 @@ def test_count_window_increases(sweep_report, n_increases):
         (DAY2_PLANNED_COURSE, 2019945),
     ),
 )
+def test_navigate_no_aim(planned_course, position):
+    assert aoc.navigate_no_aim(planned_course) == position
+
+
+@pytest.mark.parametrize(
+    ("planned_course", "position"),
+    (
+        (("forward 1",), 0),
+        (("forward 5", "down 5"), 0),
+        (("forward 5", "down 5", "forward 8"), 520),
+        (("forward 5", "down 5", "forward 8", "up 3"), 520),
+        (("forward 5", "down 5", "forward 8", "up 3", "down 8"), 520),
+        (("forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2"), 900),
+        (DAY2_PLANNED_COURSE, 1599311480),
+    ),
+)
 def test_navigate(planned_course, position):
     assert aoc.navigate(planned_course) == position

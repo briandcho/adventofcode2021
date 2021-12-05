@@ -16,7 +16,7 @@ def count_window_increases(sweep_data: list[int]) -> int:
     return n_increases
 
 
-def navigate(planned_course: list[str]) -> int:
+def navigate_no_aim(planned_course: list[str]) -> int:
     h_pos = depth = 0
     for cmd in planned_course:
         dir_, n = cmd.split()
@@ -26,4 +26,18 @@ def navigate(planned_course: list[str]) -> int:
             depth += int(n)
         else:
             depth -= int(n)
+    return h_pos * depth
+
+
+def navigate(planned_course: list[str]) -> int:
+    aim = h_pos = depth = 0
+    for cmd in planned_course:
+        dir_, n = cmd.split()
+        if dir_ == "forward":
+            h_pos += int(n)
+            depth += int(n) * aim
+        elif dir_ == "down":
+            aim += int(n)
+        else:
+            aim -= int(n)
     return h_pos * depth
