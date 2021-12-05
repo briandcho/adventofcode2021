@@ -1,4 +1,4 @@
-PLANNED_COURSE = [
+DAY2_PLANNED_COURSE = [
     "forward 2",
     "forward 6",
     "forward 8",

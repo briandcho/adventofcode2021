@@ -1,4 +1,4 @@
-SWEEP_REPORT = [
+DAY1_SWEEP_REPORT = [
     156,
     153,
     163,
