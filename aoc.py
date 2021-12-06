@@ -41,3 +41,18 @@ def navigate(planned_course: list[str]) -> int:
         else:
             aim -= int(n)
     return h_pos * depth
+
+
+def get_power_consumption(diagnostic_report: list[str]) -> int:
+    n_bits = len(diagnostic_report[0])
+    gamma = epsilon = ""
+    for pos in range(n_bits):
+        n_ones = n_zeroes = 0
+        for row in diagnostic_report:
+            if row[pos] == "1":
+                n_ones += 1
+            else:
+                n_zeroes += 1
+        gamma += str(int(n_ones > n_zeroes))
+        epsilon += str(int(n_ones <= n_zeroes))
+    return int(gamma, 2) * int(epsilon, 2)

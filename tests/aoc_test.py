@@ -3,6 +3,9 @@ import pytest
 import aoc
 from testing import DAY1_SWEEP_REPORT
 from testing import DAY2_PLANNED_COURSE
+from testing import DAY3_DIAGNOSTIC_REPORT
+
+# Day 1
 
 
 @pytest.mark.parametrize(
@@ -34,6 +37,9 @@ def test_count_increases(sweep_report, n_increases):
 )
 def test_count_window_increases(sweep_report, n_increases):
     assert aoc.count_window_increases(sweep_report) == n_increases
+
+
+# Day 2
 
 
 @pytest.mark.parametrize(
@@ -74,3 +80,35 @@ def test_navigate_no_aim(planned_course, position):
 )
 def test_navigate(planned_course, position):
     assert aoc.navigate(planned_course) == position
+
+
+# Day 3
+
+
+@pytest.mark.parametrize(
+    ("diagnostic_report", "consumption"),
+    (
+        (("00100",), 108),
+        (("00100", "11110", "10110"), 198),
+        (
+            (
+                "00100",
+                "11110",
+                "10110",
+                "10111",
+                "10101",
+                "01111",
+                "00111",
+                "11100",
+                "10000",
+                "11001",
+                "00010",
+                "01010",
+            ),
+            198,
+        ),
+        (DAY3_DIAGNOSTIC_REPORT, 3969000),
+    ),
+)
+def test_get_power_consumption(diagnostic_report, consumption):
+    assert aoc.get_power_consumption(diagnostic_report) == consumption
