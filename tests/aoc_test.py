@@ -112,3 +112,34 @@ def test_navigate(planned_course, position):
 )
 def test_get_power_consumption(diagnostic_report, consumption):
     assert aoc.get_power_consumption(diagnostic_report) == consumption
+
+
+@pytest.mark.parametrize(
+    ("diagnostic_report", "life_support_rating"),
+    (
+        (("10111",), 529),
+        (
+            (
+                "00100",
+                "11110",
+                "10110",
+                "10111",
+                "10101",
+                "01111",
+                "00111",
+                "11100",
+                "10000",
+                "11001",
+                "00010",
+                "01010",
+            ),
+            230,
+        ),
+        (DAY3_DIAGNOSTIC_REPORT, 4267809),
+    ),
+)
+def test_get_life_support_rating(
+    diagnostic_report,
+    life_support_rating,
+):
+    assert aoc.get_life_support_rating(diagnostic_report) == life_support_rating
