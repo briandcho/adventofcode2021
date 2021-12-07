@@ -69,3 +69,37 @@ def rating_for_bit_criteria(
         bit_value = str(int(criteria(n_bits, len(rows))))
         rows = [row for row in rows if row[pos] == bit_value]
     return int(rows[0], 2)
+
+
+def bingo(boards: list[str], draws: str) -> int:
+    _boards = [board.split() for board in boards]
+    drawn = [[False] * len(board) for board in _boards]
+    for draw in draws.split(","):
+        update_boards(_boards, drawn, draw)
+        try:
+            winner = get_winning_board(drawn)
+            return sum(
+                int(val)
+                for val, is_drawn in zip(_boards[winner], drawn[winner])
+                if not is_drawn
+            ) * int(draw)
+        except Exception:
+            pass
+    return 0
+
+
+def get_winning_board(drawn: list[list[bool]]) -> int:
+    for i, board in enumerate(drawn):
+        for pos in range(5):
+            if all(board[pos * 5 : pos * 5 + 5]) or all(board[pos::5]):
+                return i
+    raise ValueError("winner not found")
+
+
+def update_boards(boards: list[list[str]], drawn: list[list[bool]], draw: str) -> None:
+    for i, board in enumerate(boards):
+        try:
+            pos = board.index(draw)
+            drawn[i][pos] = True
+        except Exception:
+            pass
